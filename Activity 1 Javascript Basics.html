@@ -1,0 +1,87 @@
+<html>
+<head>
+  <title>Activity 1 - Javascript Basic </title>
+</head>
+<body>
+
+<table id ="userChart" class="chart">
+  <tr class="chart">
+    <td class="chart"> Full Name:</td>
+    <td id = "full_name_cell" class="chart"> <input type="value" name="fullN ame" id = "full_name"></td>
+  </tr>
+
+  <tr>
+    <td class="chart">Member ID:</td>
+    <td id = "member_id_cell" class="chart"><input type="value" name="memberID" id = "member_id"></td>
+
+  </tr>
+
+  <tr class="chart">
+    <td class="chart">Gender:</td>
+    <td id  = "gender_cell" class="chart"><input id="male" type="radio" name = "gender" checked> Male <input id="female" type="radio" name = "gender">Female</td>
+  </tr>
+
+  <tr class="chart">
+    <td class="chart">Height:</td>
+    <td id  = "height_cell" class="chart"><input type="value" id="input_height" name="user_height"></td>
+  </tr>
+
+  <tr class="chart">
+    <td class="chart">Weight:</td>
+    <td id  = "weight_cell" class="chart"><input type="value" id ="input_weight" name="user_weight"></td>
+  </tr>
+</table>
+
+<div id ="buttonSpace"> <button onclick="calculate()">Report it!</button></div>
+  <style>
+    .chart{
+      border: 1px solid gray;
+	  background-color: rgb(240,248,255);
+    }
+  </style>
+  <script>
+	var old_table_contents = document.getElementById("userChart").innerHTML;
+	
+    function IBW_male(height_cm){
+		var numHeight_cm = Number(height_cm);
+		return ((numHeight_cm - 100) - ((numHeight_cm - 100)*0.10));
+	
+  }
+    function IBW_female(height_cm){
+		var numHeight_cm = Number(height_cm);
+		return ((numHeight_cm - 100) - ((numHeight_cm - 100)*0.15));
+  }
+
+    function calculate(){
+		var final_weight;
+		var gender;
+		if (document.getElementById("male").checked == true){
+		final_weight = IBW_male(document.getElementById("input_height").value);
+		gender = "Male";
+	  }
+
+		else if ( document.getElementById("female").checked == true){
+		final_weight = IBW_female(document.getElementById("input_height").value);
+		gender = "Female";
+		}
+		var fullName = document.getElementById("full_name").value;
+		var memberID = document.getElementById("member_id").value;
+		var height = document.getElementById("input_height").value;
+		var weight = document.getElementById("input_weight").value;
+		
+		document.getElementById("userChart").innerHTML = old_table_contents + "<tr id = 'idealWeight' class='chart'>" + "<td class= 'chart'>Ideal Weight:</td>" + "<td class='chart'>" + final_weight +"</td>"; 
+		
+		document.getElementById("idealWeight").style.color = "red"; 
+		document.getElementById("idealWeight").style.fontWeight = "bold"; 
+		document.getElementById("full_name_cell").innerHTML = fullName ;
+		document.getElementById("member_id_cell").innerHTML = memberID;
+		document.getElementById("height_cell").innerHTML = height;
+		document.getElementById("weight_cell").innerHTML = weight;
+		document.getElementById("gender_cell").innerHTML = gender;
+		document.getElementById("buttonSpace").innerHTML = "";
+	
+		
+  }
+  </script>
+</body>
+</html>
